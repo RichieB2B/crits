@@ -281,6 +281,8 @@ class STIXParser():
 
             for observable in indicator.observables: # get each observable from indicator (expecting only 1)
                 try: # create CRITs Indicator from observable
+                    if not hasattr(observable.object_, 'properties'):
+                        continue
                     item = observable.object_.properties
                     obj = make_crits_object(item)
                     if obj.name and obj.name != obj.object_type:
